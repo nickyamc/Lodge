@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./bootstrap-icons/bootstrap-icons.css">
+    <link href="./bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Lodge</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-ligt">
+        <div class="container">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <img src="/img/logo.svg" height="35">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="/index.html" class="nav-link active text-green-50" aria-current="page">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/search.html" class="nav-link active" aria-current="page">Reservar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" aria-current="page">Contactos</a>
+                    </li>
+                </ul>
+                <div id="content_sign" class="d-flex" style="padding-top: -5px;">
+                    <button id="signup" class="btn btn-outline-secondary me-2" data-bs-toggle="modal" data-bs-target="#modalSignup">Crear Cuenta</button>
+                    <button id="signin" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalSignin">Iniciar Sesión</button>
+                    <a class="btn btn-light"><i class="bi bi-cart"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active carousel-content">
+                    <img src="./img/carucel-4.jpg" class="carousel-img" alt="..." >
+                    <div class="carousel-caption text-start pb-5 mb-5">
+                        <h1 class="text-warning"><strong>Vida Silvestre de la Amazonia</strong></h1>
+                        <p class="h3">Aventuras para encontrar especies en la Amazonia.</p>
+                        <br>
+                        <a class="btn btn-warning text-light btn-lg">Ver más</a>
+                    </div>
+                </div>
+                <div class="carousel-item carousel-content">
+                    <img src="./img/carucel-2.jpg" class="carousel-img" alt="...">
+                    <div class="carousel-caption text-start pb-5 mb-5">
+                        <h1 class="text-warning"><strong>Lodge en la Amazonia</strong></h1>
+                        <p class="h3">Viaje a la amazonia y disfrute de nuestro hotel en el corazon de la selva.</p>
+                        <br>
+                        <a class="btn btn-warning text-light btn-lg">Ver más</a>
+                    </div>
+                </div>
+                <div class="carousel-item carousel-content">
+                    <img src="./img/carucel-3.jpg" class="carousel-img" alt="...">
+                    <div class="carousel-caption text-start pb-5 mb-5">
+                        <h1 class="text-warning"><strong>700 Especies de Aves</strong></h1>
+                        <p class="h3">La mejor oportunidad para encontrar cientos de especies de aves locales.</p>
+                        <br>
+                        <a class="btn btn-warning text-light btn-lg">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        
+        <br>
+        <div class="row">
+            <div class="col-md-6 mx-auto my-5">
+                <h2 class="text-center text-secondary">Bienvenidos a <img src="./img/logo.svg" alt="" style="height: 25px; margin-top: -5px;"></h2>
+                <br>
+                <p class="text-center">Lodge es un negocio familiar comprometido con el medio ambiente y la protección de la Amazonia. Tenemos más de 10 años creando experiencias únicas en la selva peruana. Nuestro compromiso, experiencia y amor por lo que hacemos nos ha llevado a convertirnos en una de las principales empresas de ecoturismo de la zona. Aseguramos los mejores programas con una combinación de calidad, relajo, aventura y naturaleza. Nuestra preocupación por el medio ambiente es muy importante, por lo que nos gustaría que sepa que una parte de las ganancias por la venta de nuestros programas es directamente destinada para nuestros proyectos de protección e investigación en nuestra concesión de conservación.</p>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="container">
+            <div class="row ">
+                <div class="col-12 col-md-6">
+                    <h3 class="">Acerca de <img src="./img/logo.svg" alt="" style="height: 21px; margin-top: -5px;"></h3>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h3 class="">Novedades</h3>
+                </div>
+            </div>
+        </div>
+        
+        
+    </main>
+
+    <div class="border-top py-3 my-4">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center  container">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    
+                </a>
+                <span class="mb-3 mb-md-0 text-muted"> Lodge &copy; 2022, Desarrollo 💙 Nick MC</span>
+            </div>
+        
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3">
+                    <a class="text-muted" href="#">
+                        <svg class="bi" width="32" height="32" fill="currentColor">
+                            <use xlink:href="./bootstrap-icons/bootstrap-icons.svg#facebook"/>
+                        </svg>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="#">
+                        <svg class="bi" width="32" height="32" fill="currentColor">
+                            <use xlink:href="./bootstrap-icons/bootstrap-icons.svg#twitter"/>
+                        </svg>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="#">
+                       <svg class="bi" width="32" height="32" fill="currentColor">
+                            <use xlink:href="./bootstrap-icons/bootstrap-icons.svg#instagram"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+    </div>
+
+    <div class="modal py-5" tabindex="-1" role="dialog" id="modalSignin">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-4 shadow">
+                <div class="modal-header p-5 pb-4 border-bottom-0">
+                    <h2 class="fw-bold mb-0">Inicio de Sesión</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+        
+                <div class="modal-body p-5 pt-0">
+                    <form class="">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control rounded-3" id="email_signin" placeholder="name@example.com">
+                            <label>Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-3" id="password_signin" placeholder="Password">
+                            <label for="floatingPassword">Contraseña</label>
+                        </div>
+                        <a href="./index.html" id="btn_signin" class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button">Ingresar</a>
+                        <a href="#" class="text-secondary"><small>¿Olvidaste tú contraseña?</small></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal py-5" tabindex="-1" role="dialog" id="modalSignup">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-4 shadow">
+                <div class="modal-header p-5 pb-4 border-bottom-0">
+                    <h2 class="fw-bold mb-0">Crear Cuenta</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+        
+                <div class="modal-body p-5 pt-0">
+                    <form class="">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">Contraseña</label>
+                        </div>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button">Registrarse</button>
+                        <small class="text-muted">Al dar click acepta todos los terminos y condiciones.</small>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="./js/global.js"></script>
+    <script type="module" src="./js/login.js"></script>
+    <script type="module" src="./js/index.js"></script>
+    <script src="./bootstrap-5.2.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
