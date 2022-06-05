@@ -1,5 +1,7 @@
 import { People } from "./people.js";
 
+let arrayUsers = []
+
 export class User extends People {
     constructor(id, document, firstname, lastname, age, email, password) {
         super(id, document, firstname, lastname, age)
@@ -9,77 +11,119 @@ export class User extends People {
 
     static save(document, firstname, lastname, age, email, password) {
         try {
-            let array = this.all()
-            array.push(new User(array.length + 1, document, firstname, lastname, age, email, password))
-            this.update(array)
-            return true
+            let { users } = User.all
+            let user = new User((users.length === 0 ? 1 : User.newId), document, firstname, lastname, age, email, password)
+            users.push(user)
+            arrayUsers = users
+            return {
+                user: user,
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return false
+            console.error(`Error en el metodo User.save() => ${error.message}`)
+            return {
+                user: undefined,
+                queryStatus: false
+            }
         }
     }
 
     static get(id) {
         try {
-            return this.all().find(user => user.id === id)
+            let { users } = User.all
+            return {
+                user: users.find(user => user.getId === id),
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return undefined
+            console.error(`Error en el metodo User.get() => ${error.message}`)
+            return {
+                user: undefined,
+                queryStatus: false
+            }
         }
     }
 
-    static all() {
+    static get all() {
         try {
-            return JSON.parse(localStorage.getItem("arrayUsers"))
+            return { 
+                users: arrayUsers,
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return undefined
+            console.error(`Error en el metodo User.all() => ${error.message}`)
+            return {
+                users: undefined,
+                queryStatus: false
+            }
+        }
+    }
+
+    static get newId() {
+        try {
+            let { users } = User.all
+            return users.length==0?1:users.find(user => {
+                return (users.filter(usr => usr.getId > user.getId).length === 0) ? true : false
+            }).id + 1
+        } catch (error) {
+            console.error(`Error en el metodo User.newid() => ${error.message}`)
+            return isNaN
         }
     }
 
     static update(id, firstname, lastname, age, email, password) {
         try {
-            let array = this.all()
-            const index = array.lastIndexOf(this.get(id))
-            array[index].documen = document
-            array[index].firstname =  firstname
-            array[index].lastname = lastname
-            array[index].age = age
-            array[index].email = email
-            array[index].password = password
-
-            this.updateLS(array)
-
-            return true
+            let { users } = this.all
+            let { user } = User.get(id)
+            const index = users.lastIndexOf(user)
+            users[index].setDocument(document)
+            users[index].setFirstname(firstname)
+            users[index].setLastname(lastname)
+            users[index].setAge(age)
+            users[index].setEmail(email)
+            users[index].setPassword(password)
+            arrayUsers = users
+            return {
+                user: users[index],
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return false
-        }
-    }
-
-    static updateLS(array) {
-        localStorage.setItem("arrayUsers", JSON.stringify(array))
-    }
-
-    static delete(id) {
-        try {
-            let array = this.all()
-            array.splice(array.lastIndexOf(this.get(id)), 1)
-            this.updateLS(array)
-
-            return true
-        } catch (error) {
-            console.error(error)
-            return false
+            console.error(`Error en el metodo User.update() => ${error.message}`)
+            return {
+                user: undefined,
+                queryStatus: false
+            }
         }
     }
 
     static login(email, password) {
         try {
-            return this.all().find(user => user.email === email && user.password === password)
+            let { users } = User.all
+            let user = users.find(user => user.getEmail === email && user.getPassword === password)
+            localStorage.setItem("user", JSON.stringify(user))
+            return {
+                user: user, 
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return undefined
+            console.error(`Error en el metodo User.login() => ${error.message}`)
+            return {
+                user: undefined,
+                queryStatus: false
+            }
+        }
+    }
+
+    static delete(id) {
+        try {
+            let { users } = User.all
+            let { user } = User.get(id)
+            users.splice(users.lastIndexOf(user),1)
+            arrayUsers = users
+            return true
+        } catch (error) {
+            console.error(`Error en el metodo User.delete() => ${error.message}`)
+            return false
         }
     }
 

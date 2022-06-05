@@ -1,3 +1,5 @@
+let arrayRooms = []
+
 export class Room {
     constructor(id, number, type, price, description, imgURL, capacity) {
         this.id = id
@@ -11,66 +13,100 @@ export class Room {
 
     static save(number, type, price, description, imgURL, capacity) {
         try {
-            let array = this.all()
-            array.push(new Room(array.length + 1, number, type, price, description, imgURL, capacity))
-            this.updateLS(array)
-
-            return true
+            let { rooms } = Room.all
+            let room = new Room((rooms.length === 0 ? 1 : Room.newId), number, type, price, description, imgURL, capacity)
+            rooms.push(room)
+            arrayRooms = rooms
+            return {
+                room: room,
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return false
+            console.error(`Error en el metodo Room.save() => ${error.message}`)
+            return {
+                room: undefined,
+                queryStatus: false
+            }
         }
     }
 
-    static all() {
+    static get all() {
         try {
-            return JSON.parse(localStorage.getItem("arrayRooms"))
+            return {
+                rooms: arrayRooms,
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return undefined
+            console.error(`Error en el metodo Room.all() => ${error.message}`)
+            return {
+                rooms: undefined,
+                queryStatus: false
+            }
         }
     }
 
     static get(id) {
         try {
-            return this.all().find((room) => room.id === id)
+            let { rooms } = Room.all
+            return {
+                room: rooms.find(room => room.getId === id),
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return undefined
+            console.error(`Error en el metodo Room.get() => ${error.message}`)
+            return {
+                room: undefined,
+                queryStatus: false
+            }
+        }
+    }
+
+    static get newId() {
+        try {
+            let { rooms } = Room.all
+            return rooms.length==0?1:rooms.find(room => {
+                return (rooms.filter(rm => rm.getId > room.getId).length === 0) ? true : false
+            }).id + 1
+        } catch (error) {
+            console.error(`Error en el metodo Room.newid() => ${error.message}`)
+            return isNaN
         }
     }
 
     static update(id, number, type, price, description, imgURL, capacity) {
         try {
-            let array = this.all()
-            let index = array.lastIndexOf(this.get(id))
-            array[index].number = number
-            array[index].type = type
-            array[index].price = price
-            array[index].description = description
-            array[index].imgURL =imgURL
-            array[index].capacity = capacity
-            this.updateLS(array)
-
-            return true
+            let { rooms } = User.all
+            let { room } = Room.get(id)
+            const index = rooms.lastIndexOf(room)
+            users[index].setNumber(number)
+            users[index].setType(type)
+            users[index].setPrice(price)
+            users[index].setDescription(description)
+            users[index].setImgURL(imgURL)
+            users[index].setCapacity(capacity)
+            arrayRooms = rooms
+            return {
+                room: rooms[index],
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return false
-        }
-    }
-    static updateLS(array) {
-        localStorage.setItem("arrayRooms", JSON.stringify(array))
+            console.error(`Error en el metodo Room.update() => ${error.message}`)
+            return {
+                room: undefined,
+                queryStatus: false
+            }
+        } 
     }
 
     static delete(id) {
         try {
-            let array = this.all()
-            array.splice(array.lastIndexOf(this.get(id), 1))
-            this.updateLS(array)
-
+            let { rooms } = Room.all
+            let { room } = Room.get(id)
+            rooms.splice(rooms.lastIndexOf(room),1)
+            arrayRooms = rooms
             return true
         } catch (error) {
-            console.error(error)
+            console.error(`Error en el metodo Room.delete() => ${error.message}`)
             return false
         }
     }

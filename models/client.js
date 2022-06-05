@@ -1,4 +1,7 @@
 import { People } from "./people.js";
+import { User } from "./user.js";
+
+let arrayClients = []
 
 export class Client extends People {
     constructor(id, document, firstname, lastname, age) {
@@ -7,63 +10,97 @@ export class Client extends People {
 
     static save(document, firstname, lastname, age) {
         try {
-            let array = this.all()
-            array.push(new Client(array.length + 1, document, firstname, lastname, age))
-            this.updateLS(array)
-
-            return true
+            let { clients } = Client.all
+            let client = new Client((clients.length === 0 ? 1 : Client.newId), document, firstname, lastname, age)
+            users.push(client)
+            return {
+                client: client,
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return false
+            console.error(`Error en el metodo Client.save() => ${error.message}`)
+            return {
+                client: undefined,
+                queryStatus: false
+            }
         }
     }
 
     static get(id) {
         try {
-            return this.all().find(client => client.id === id)
+            let { clients } = Client.all
+            return {
+                client: clients.find(client => client.id === id),
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return undefined
+            console.error(`Error en el metodo Client.get() => ${error.message}`)
+            return {
+                client: undefined,
+                queryStatus: false
+            }
         }
     }
 
-    static all() {
+    static get all() {
         try {
-            return JSON.parse(localStorage.getItem("arrayClients"))
+            return {
+                clients: arrayClients,
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return undefined
+            console.error(`Error en el metodo Client.all() => ${error.message}`)
+            return {
+                clients: undefined,
+                queryStatus: false
+            }
+        }
+    }
+
+    static get newId() {
+        try {
+            let { clients } = Client.all
+            return clients.length === 0 ? 1 : clients.find(client => {
+                return (clients.filter(cli => cli.getId > client.getId).length === 0) ? true : false
+            }).id + 1
+        } catch (error) {
+            console.error(`Error en el metodo Client.newid() => ${error.message}`)
+            return isNaN
         }
     }
 
     static update(id, firstname, lastname, age) {
         try {
-            let array = this.all()
-            const index = array.lastIndexOf(this.get(id))
-            array[index].document = document
-            array[index].firstname =firstname
-            array[index].lastname = lastname
-            array[index].age = age
-            this.updateLS(array)
-
-            return true
+            let { clients } = Client.all
+            let { client } = Client.get(id)
+            const index = clients.lastIndexOf(client)
+            clients[index].setDocument(document)
+            clients[index].setFirstname(firstname)
+            clients[index].setLastname(lastname)
+            clients[index].setAge(age)
+            arrayClients = clients
+            return {
+                client: clients[index],
+                queryStatus: true
+            }
         } catch (error) {
-            console.error(error)
-            return false
+            console.error(`Error en el metodo Client.update() => ${error.message}`)
+            return {
+                client: undefined,
+                queryStatus: false
+            }
         }
-    }
-
-    static updateLS(array) {
-        localStorage.setItem("arrayClients", JSON.stringify(array))
     }
 
     static delete(id) {
         try {
-            let array = this.all()
-            array.splice(array.lastIndexOf(this.get(id)), 1)
+            let { clients } = Client.all
+            let { client } = Client.get(id)
+            clients.splice(array.lastIndexOf(client), 1)
+            arrayClients = clients
             return true
         } catch (error) {
-            console.error(error)
+            console.error(`Error en el metodo Client.delete() => ${error.message}`)
             return false
         }
     }
