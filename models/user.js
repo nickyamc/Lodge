@@ -3,16 +3,17 @@ import { People } from "./people.js";
 let arrayUsers = []
 
 export class User extends People {
-    constructor(id, document, firstname, lastname, age, email, password) {
+    constructor(id, document, firstname, lastname, age, email, password, admin) {
         super(id, document, firstname, lastname, age)
         this.email = email
         this.password = password
+        this.admin = admin 
     }
 
-    static save(document, firstname, lastname, age, email, password) {
+    static save(document, firstname, lastname, age, email, password, admin) {
         try {
             let { users } = User.all
-            let user = new User((users.length === 0 ? 1 : User.newId), document, firstname, lastname, age, email, password)
+            let user = new User((users.length === 0 ? 1 : User.newId), document, firstname, lastname, age, email, password, admin)
             users.push(user)
             arrayUsers = users
             return {
@@ -71,7 +72,7 @@ export class User extends People {
         }
     }
 
-    static update(id, firstname, lastname, age, email, password) {
+    static update(id, firstname, lastname, age, email, password, admin) {
         try {
             let { users } = this.all
             let { user } = User.get(id)
@@ -82,6 +83,7 @@ export class User extends People {
             users[index].setAge(age)
             users[index].setEmail(email)
             users[index].setPassword(password)
+            users[index].setAdmin(admin)
             arrayUsers = users
             return {
                 user: users[index],
@@ -141,5 +143,13 @@ export class User extends People {
 
     set setPassword(password) {
         this.password = password
+    }
+
+    get getAdmin() {
+        return this.admin
+    }
+
+    set setAdmin(admin) {
+        this.admin = admin
     }
 }
